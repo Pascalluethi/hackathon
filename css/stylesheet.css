@@ -1,0 +1,78 @@
+/* Styles für die Beitragspanels
+/* Anpassung auf unsere Site über den Zusatz p42...
+/* Beitrags-Panels und Beitrags-Thumbnails erhalten ZUSÄTZLICHE Klasse mit dem Zusatz p42.
+/* So werden nur gezielt diese Panels verändert.
+/* http://bootsnipp.com/snippets/featured/user-comment-example */
+
+
+
+
+.modal.modal-wide .modal-dialog {
+  width: 90%;
+}
+.modal-wide .modal-body {
+  overflow-y: auto;
+}
+
+
+
+.p42thumbnail {
+  padding:0px;
+}
+.p42panel {
+	position:relative;
+}
+.p42panel>.panel-heading:after,.p42panel>.panel-heading:before{
+	position:absolute;
+	top:11px;left:-16px;
+	right:100%;
+	width:0;
+	height:0;
+	display:block;
+	content:" ";
+	border-color:transparent;
+	border-style:solid solid outset;
+	pointer-events:none;
+}
+.p42panel>.panel-heading:after{
+	border-width:7px;
+	border-right-color:#f7f7f7;
+	margin-top:1px;
+	margin-left:2px;
+}
+.p42panel>.panel-heading:before{
+	border-right-color:#ddd;
+	border-width:8px;
+}
+.p42panel>.panel-footer{
+	background-color: #ffffff;
+}
+
+/* Styles für die Freundesliste
+/* Anpassung auf unsere Site über den Zusatz p42...
+/* form-groups erhalten ZUSÄTZLICHE Klasse mit dem Zusatz p42.
+/* http://bootsnipp.com/snippets/featured/fancy-bootstrap-checkboxes */
+
+.p42-form-group input[type="checkbox"] {
+  display: none;
+}
+
+/* wird durch eigene col-Einstellungen ersetzt -> flexibler
+
+  .form-group input[type="checkbox"] + .btn-group > label span {
+  width: 20px;
+}*/
+
+.p42-form-group input[type="checkbox"] + .btn-group > label span:first-child {
+  display: none;
+}
+.p42-form-group input[type="checkbox"] + .btn-group > label span:last-child {
+  display: inline-block;
+}
+
+.p42-form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+  display: inline-block;
+}
+.p42-form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+  display: none;
+}
