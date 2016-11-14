@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>p42 - Home</title>
+  <title>PicMap Leslie</title>
 
   <!-- Bootstrap -->
   <!-- Latest compiled and minified CSS -->
