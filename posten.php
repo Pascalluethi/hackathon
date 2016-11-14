@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +58,7 @@
 
      <h3>Hier kannst du deine Bilder posten</h3><hr />
 
-     <!-- Post hinzufügen -->
+     <!-- Bild hinzufügen -->
             <div class="row">
               <div class="col-xs-12">
                 <div class="panel panel-default">
@@ -63,9 +66,11 @@
                   <div class="panel-body">
                     <form enctype="multipart/form-data" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                       <div class="collapse" id="upload_container">
+
                         <div class="well">
                             <input type="file" name="post_img" id="post_img">
                         </div>
+
                       </div>
                       <a class="btn btn-default" role="button" data-toggle="collapse" href="#upload_container" aria-expanded="false" aria-controls="collapseExample">
                         Bild hinzufügen
@@ -75,16 +80,18 @@
 
                       <div class="form-group row">
                         <label for="Gender" class="col-xs-12 form-control-label">Wähle eine Kategorie für dein Bild</label>
+
                         <div class="col-sm-5">
                           <select class="form-control form-control-sm" id="Gender" name="gender">
                             <option value="">--</option>
-                            <option value="Frau">Museum</option>
-                            <option value="Herr">Kultur</option>
-                            <option value="">Essen</option>
-                            <option value="Frau">Sport</option>
-                            <option value="Herr">Sehenswürdigkeiten</option>
+                            <option value="Museum">Museum</option>
+                            <option value="Kultur">Kultur</option>
+                            <option value="Essen">Essen</option>
+                            <option value="Sport">Sport</option>
+                            <option value="Sehenswürdigkeiten">Sehenswürdigkeiten</option>
                           </select>
                         </div>
+
                       </div>
 
                       <button type="submit" name="post-submit" class="btn btn-primary">posten</button>

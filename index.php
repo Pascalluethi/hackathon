@@ -1,3 +1,45 @@
+<?php
+
+
+
+require_once('system/data.php');
+require_once('system/security.php');
+
+
+$error = false;
+$error_msg = "";
+$success = false;
+$success_msg = "";
+
+
+if(isset($_POST['login-submit'])){
+    if(!empty($_POST['email']) && !empty($_POST['password'])){
+      $email = filter_data($_POST['email']);
+      $password = filter_data($_POST['password']);
+
+      $result = login($email, $password);
+
+      $row_count = mysqli_num_rows($result);
+
+      if($row_count == 1){
+        $user = mysqli_fetch_assoc($result);
+        session_start();
+        $_SESSION['id'] = $user['user_id'];
+        echo '<script type="text/javascript">alert("Es funktioniert");</script>';
+
+      }else {
+        $error = true;
+        $error_msg .= "Leider konnten wir ihre E-Mailadresse oder ihr Passwort nicht finden.<br/>";
+      }
+    }else {
+      $error = true;
+      $error_msg .= "Bitte füllen Sie beide Felder aus.<br/>";
+    }
+  }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,7 +161,13 @@
             </div>
           </div>
 
-
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-6 col-sm-offset-6">
+                <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-info" value="einloggen">
+              </div>
+            </div>
+          </div>
 
       </form>
     </div>
@@ -169,6 +217,9 @@
               name="firstname" value="<?php echo $user['firstname']; ?>">
     </div>
   </div>
+
+
+
   <div class="form-group row">
     <label for="Nachname" class="col-xs-12 form-control-label">Nachname</label>
     <div class="col-sm-10">
@@ -199,7 +250,13 @@
   </div>
 
 
-
+  <div class="form-group">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-6">
+        <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-info" value="Registrieren">
+      </div>
+    </div>
+  </div>
 
       </form>
 
