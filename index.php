@@ -52,6 +52,10 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
 
   $name = filter_data($_POST['name']);
     $age = $_POST['age'];
+    $parts = explode(".",$age);
+    $age = $parts [2]."-".$parts [1]."-".$parts [0];
+
+
       $gender = filter_data($_POST['gender']);
 
 
