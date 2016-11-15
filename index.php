@@ -35,7 +35,39 @@ if(isset($_POST['login-submit'])){
       $error = true;
       $error_msg .= "Bitte füllen Sie beide Felder aus.<br/>";
     }
+    if(login($email, $password)){
+             $success = true;
+             $success_msg .= "Sie haben erfolgreich eingeloggt.</br>";
   }
+}
+
+//Registrierung
+  if(isset($_POST['register-submit'])){
+if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confirm-password'])){
+    $email = filter_data($_POST['email']);
+  $password = filter_data($_POST['password']);
+  $confirm_password = filter_data($_POST['confirm-password']);
+  if($password == $confirm_password){
+           if(register($email, $password)){
+                    $success = true;
+                    $success_msg .= "Sie haben erfolgreich registriert.</br>
+                    Bitte loggen Sie sich jetzt ein.</br>";
+
+
+  }else{
+        $error = true;
+        $error_msg .= "Es gibt ein Problem mit der Datenbankverbindung.</br>";
+      }
+
+    }else{
+    $error = true;
+    $error_msg .= "Die Passwörter stimmen nicht überein.</br>";
+    }
+}else{
+  $error = true;
+  $error_msg .= "Bitte füllen Sie alle Felder aus.</br>";
+}
+}
 
 ?>
 
@@ -169,6 +201,7 @@ if(isset($_POST['login-submit'])){
             </div>
           </div>
 
+
       </form>
     </div>
   </div>
@@ -253,7 +286,7 @@ if(isset($_POST['login-submit'])){
   <div class="form-group">
     <div class="row">
       <div class="col-sm-6 col-sm-offset-6">
-        <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-info" value="Registrieren">
+        <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-info" value="Registrieren">
       </div>
     </div>
   </div>
