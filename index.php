@@ -1,9 +1,11 @@
 <?php
 
 
-
 require_once('system/data.php');
 require_once('system/security.php');
+require_once('system/secretdata.php');
+
+
 
 
 $error = false;
@@ -25,7 +27,6 @@ if(isset($_POST['login-submit'])){
         $user = mysqli_fetch_assoc($result);
         session_start();
         $_SESSION['id'] = $user['user_id'];
-
 
       }else {
         $error = true;
@@ -50,13 +51,13 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
   $password = filter_data($_POST['password']);
   $confirm_password = filter_data($_POST['confirm-password']);
 
-  $name = filter_data($_POST['name']);
+    $name = filter_data($_POST['name']);
+
     $age = $_POST['age'];
     $parts = explode(".",$age);
-    $age = $parts [2]."-".$parts [1]."-".$parts [0];
+    @$age = $parts[2] . "-" . $parts[1] . "-" . $parts[0];
 
-
-      $gender = filter_data($_POST['gender']);
+    $gender = filter_data($_POST['gender']);
 
 
 
@@ -132,8 +133,13 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
           <li class="active"><a href="index.php">Home</a></li>
           <li><a href="#" data-toggle="modal" data-target="#myModallogin">Login</a></li>
           <li><a href="#" data-toggle="modal" data-target="#myModalregister">Registrieren</a></li>
-          <li><a href="posten.php">Bilder posten</a></li>
+            <?php if ($success == true){?>
+            <li><a href="posten.php">Bilder posten</a></li>
+            <?php } ?>
+
+            <?php if ($success == true){?>
           <li><a href="profil.php">Profil</a></li>
+            <?php } ?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="index.php">Logout</a></li>
@@ -269,7 +275,7 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
   <div class="form-group row">
     <label for="date" class="col-xs-12 form-control-label">Geburtsdatum</label>
     <div class="col-sm-10">
-      <input  type="date" id="date" placeholder="tt.mm.jjjj" name="age" class="form-control form-control-sm" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}">
+      <input  type="text" id="date" placeholder="tt.mm.jjjj" name="age" class="form-control form-control-sm" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}">
     </div>
   </div>
 
