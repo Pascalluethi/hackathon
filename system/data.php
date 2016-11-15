@@ -81,7 +81,7 @@ require_once('secretdata.php');
 		return get_result($sql);
 	}
 
-  function update_user($user_id, $email, $password, $confirm_password, $gender, $firstname, $lastname, $image_name){
+  function update_user($user_id, $email, $password, $confirm_password, $gender, $name, $age){
   	$sql_ok = false;
   	$sql = "UPDATE user SET ";
   	if($email != ""){
@@ -96,18 +96,15 @@ require_once('secretdata.php');
       $sql .= "gender = '$gender', ";
   		$sql_ok = true;
     }
-    if($firstname != ""){
-      $sql .= "firstname = '$firstname', ";
+    if($name != ""){
+      $sql .= "name = '$name', ";
   		$sql_ok = true;
     }
-    if($lastname != ""){
-      $sql .= "lastname = '$lastname', ";
+    if($age != ""){
+      $sql .= "age = '$age', ";
   		$sql_ok = true;
     }
-    if($image_src != ""){
-      $sql .= "img_src = '$image_src', ";
-  		$sql_ok = true;
-    }
+
     // Das Komma an der vorletzten Position des $sql-Strings durch ein Leerzeichen ersetzen
     $sql = substr_replace($sql, ' ', -2, 1); // (Aus welchem String soll etwas entfernt werden, welcher Wert soll eingesetz werden, Wo soll das ersetzt werden -2 = vorletzte Stelle, Wiviele Stellen sollen entfernt werden)
 
