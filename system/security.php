@@ -1,5 +1,6 @@
 <?php
   require_once("data.php");
+  require_once('secretdata.php');
 
 	function filter_data($input){
 		$db = get_db_connection();
