@@ -1,3 +1,4 @@
 .DS_Store
 system/data.php
 .ftpconfig
+system/secretdata.php
