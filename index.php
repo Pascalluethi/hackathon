@@ -45,12 +45,19 @@ if(isset($_POST['login-submit'])){
 
 //Registrierung
   if(isset($_POST['register-submit'])){
-if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confirm-password'])){
+if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confirm-password']) && !empty($_POST['name'])  && !empty($_POST['age'])&& !empty($_POST['gender'])){
     $email = filter_data($_POST['email']);
   $password = filter_data($_POST['password']);
   $confirm_password = filter_data($_POST['confirm-password']);
+
+  $name = filter_data($_POST['name']);
+    $age = $_POST['age'];
+      $gender = filter_data($_POST['gender']);
+
+
+
   if($password == $confirm_password){
-           if(register($email, $password)){
+           if(register($email, $password, $name, $age, $gender)){
                     $success = true;
                     $success_msg .= "Sie haben erfolgreich registriert.</br>
                     Bitte loggen Sie sich jetzt ein.</br>";
@@ -58,16 +65,16 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
 
   }else{
         $error = true;
-        $error_msg .= "Es gibt ein Problem mit der Datenbankverbindung.</br>";
+        $error_msg .= "Es gibt ein Problem mit der Datenbankverbindung.";
       }
 
     }else{
     $error = true;
-    $error_msg .= "Die Passwörter stimmen nicht überein.</br>";
+    $error_msg .= "Die Passwörter stimmen nicht überein.";
     }
 }else{
   $error = true;
-  $error_msg .= "Bitte füllen Sie alle Felder aus.</br>";
+  $error_msg .= "Bitte füllen Sie alle Felder aus.";
 }
 }
 
@@ -237,34 +244,33 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
         <div class="modal-body">
 
   <div class="form-group row">
-    <label for="Gender" class="col-xs-12 form-control-label">Anrede</label>
+    <label for="Gender" class="col-xs-12 form-control-label">Geschlecht</label>
     <div class="col-sm-5">
       <select class="form-control form-control-sm" id="Gender" name="gender">
-        <option value="">--</option>
-        <option value="Frau">Frau</option>
-        <option value="Herr">Herr</option>
+        <option value="">bitte anwählen</option>
+        <option value="w">weiblich</option>
+        <option value="m">männlich</option>
       </select>
     </div>
   </div>
   <div class="form-group row">
-    <label for="Vorname" class="col-xs-12 form-control-label">Vorname</label>
+    <label for="Name" class="col-xs-12 form-control-label">Name</label>
     <div class="col-sm-10">
       <input  type="text" class="form-control form-control-sm"
-              id="Vorname" placeholder="Vorname"
-              name="firstname" value="<?php echo $user['firstname']; ?>">
+              id="Name" placeholder="Name"
+              name="name">
     </div>
   </div>
-
-
 
   <div class="form-group row">
-    <label for="Nachname" class="col-xs-12 form-control-label">Nachname</label>
+    <label for="date" class="col-xs-12 form-control-label">Geburtsdatum</label>
     <div class="col-sm-10">
-      <input  type="text" class="form-control form-control-sm"
-              id="Nachname" placeholder="Nachname"
-              name="lastname" value="">
+      <input  type="date" id="date" placeholder="tt.mm.jjjj" name="age" class="form-control form-control-sm" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}">
     </div>
   </div>
+
+
+
   <div class="form-group row">
     <label for="Email" class="col-sm-12 form-control-label">E-Mail</label>
     <div class="col-sm-10">
