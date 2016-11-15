@@ -25,11 +25,13 @@ if(isset($_POST['login-submit'])){
         $user = mysqli_fetch_assoc($result);
         session_start();
         $_SESSION['id'] = $user['user_id'];
-        echo '<script type="text/javascript">alert("Es funktioniert");</script>';
+
 
       }else {
         $error = true;
-        $error_msg .= "Leider konnten wir ihre E-Mailadresse oder ihr Passwort nicht finden.<br/>";
+        $error_msg .= "Leider konnten wir ihre E-Mailadresse oder ihr Passwort nicht finden.";
+
+
       }
     }else {
       $error = true;
@@ -37,7 +39,7 @@ if(isset($_POST['login-submit'])){
     }
     if(login($email, $password)){
              $success = true;
-             $success_msg .= "Sie haben erfolgreich eingeloggt.</br>";
+             $success_msg .= "Sie haben sich erfolgreich eingeloggt.";
   }
 }
 
@@ -132,16 +134,18 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
 
 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12"> <!-- Hauptinhalt -->
 
-        <!-- Map -->
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">Deine Map</div>
-              <div class="panel-body">
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="panel panel-default">
+            <div class="panel-heading"> Deine Map</div>
+            <div class="panel-body">
+
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d43575.2603146001!2d7.398644734376583!3d46.9527738085928!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478e39c0d43a1b77%3A0xcb555ffe0457659a!2sBern!5e0!3m2!1sde!2sch!4v1478786902973" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 
@@ -183,7 +187,7 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
             <div class="col-sm-12">
               <input  type="email" class="form-control form-control-sm"
                       id="Email" placeholder="E-Mail"
-                      name="email" value="<?php echo $user['email']; ?>">
+                      name="email">
             </div>
           </div>
           <div class="form-group row">
@@ -299,6 +303,20 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
 
 </div>
 <!-- / Registrieren -->
+
+
+
+
+<?php
+if(!empty($success_msg)) {     //wenn erfolgreich eingeloggt führe echo aus (bezieht sich auf Variable die true ist)
+  echo '<script type="text/javascript">alert("' . $success_msg . '");</script>';
+  }
+  else {
+    if(!empty($error_msg)) {
+      echo '<script type="text/javascript">alert("' . $error_msg . '");</script>';
+    }
+  }
+?>
 
 
 
