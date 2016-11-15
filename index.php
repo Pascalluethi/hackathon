@@ -229,7 +229,7 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
 
         <div class="modal-header">
           <div class="col-sm-12">
-              <h4 class="modal-title" id="myModalLabelregister">Registreieren</h4>
+              <h4 class="modal-title" id="myModalLabelregister">Registrieren</h4>
           </div>
         </div>
 
@@ -240,9 +240,9 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
     <label for="Gender" class="col-xs-12 form-control-label">Anrede</label>
     <div class="col-sm-5">
       <select class="form-control form-control-sm" id="Gender" name="gender">
-        <option <?php if($user['gender']=="") echo "select"; ?> value="">--</option>
-        <option <?php if($user['gender']=="Frau") echo "select"; ?> value="Frau">Frau</option>
-        <option <?php if($user['gender']=="Herr") echo "select"; ?> value="Herr">Herr</option>
+        <option value="">--</option>
+        <option value="Frau">Frau</option>
+        <option value="Herr">Herr</option>
       </select>
     </div>
   </div>
@@ -262,7 +262,7 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
     <div class="col-sm-10">
       <input  type="text" class="form-control form-control-sm"
               id="Nachname" placeholder="Nachname"
-              name="lastname" value="<?php echo $user['lastname']; ?>">
+              name="lastname" value="">
     </div>
   </div>
   <div class="form-group row">
@@ -270,7 +270,7 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
     <div class="col-sm-10">
       <input  type="email" class="form-control form-control-sm"
               id="Emailregister" placeholder="E-Mail"
-              name="email" value="<?php echo $user['email']; ?>">
+              name="email" value="">
     </div>
   </div>
   <div class="form-group row">
