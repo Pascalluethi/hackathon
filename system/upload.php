@@ -69,7 +69,7 @@ require_once('security.php');
   }
 
   // Bildupload
-  function upload_post_image($image_file){
+  function upload_post_image($image_file, $kategorie){
 
     $uploadOk = true;
   	$upload_path = "post_img/";   // Zielverzeichnis für hochzuladene Datei
@@ -106,7 +106,7 @@ require_once('security.php');
         move_uploaded_file (
   			  $image_file['tmp_name'] ,
           $upload_path . $image );
-          $sql = "INSERT INTO image (user_id, image) VALUES ('$user_id', '$image');";
+          $sql = "INSERT INTO image (user_id, categories, image) VALUES ('$user_id', '$kategorie', '$image');";
       		return get_result($sql);
   	  }
   	}

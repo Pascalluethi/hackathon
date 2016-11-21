@@ -18,7 +18,8 @@ if(isset($_POST['post-submit'])){
   	$upload_post = false;
   	if ( ($_FILES['post_img']['name']  != "")){
   		require_once('system/upload.php');
-  		$image = upload_post_image($_FILES['post_img']);
+      $kategorie = filter_data($_POST['kategorie']);
+  		$image = upload_post_image($_FILES['post_img'], $kategorie);
     	$upload_post = true;
     }else{
     	$image = NULL;
@@ -121,7 +122,7 @@ if(isset($_POST['post-submit'])){
                         <label for="Gender" class="col-xs-12 form-control-label">Wähle eine Kategorie für dein Bild</label>
 
                         <div class="col-sm-5">
-                          <select class="form-control form-control-sm" id="Gender" name="gender">
+                          <select class="form-control form-control-sm" id="Kategorie" name="kategorie" required="required">
                             <option value="">--</option>
                             <option value="Museum">Museum</option>
                             <option value="Kultur">Kultur</option>

@@ -155,7 +155,7 @@ if(isset($_POST['update-submit'])){
           </div>
           </div>
           <div class="form-group row">
-            <label for="Vorname" class="col-sm-2 col-xs-12 form-control-label">Name</label>
+            <label for="Age" class="col-sm-2 col-xs-12 form-control-label">Geburtsdatum</label>
           <div class="col-sm-5 col-xs-6">
             <input  type="text" class="form-control form-control-sm"
                     id="age" placeholder="age"
@@ -171,7 +171,7 @@ if(isset($_POST['update-submit'])){
           </div>
         </div>
         <div class="form-group row">
-          <label for="Passwort" class="col-sm-2 form-control-label">Password</label>
+          <label for="Passwort" class="col-sm-2 form-control-label">Passwort</label>
           <div class="col-sm-10">
             <input type="password" class="form-control form-control-sm" id="Passwort" placeholder="Passwort" name="password">
           </div>
