@@ -36,11 +36,23 @@ if(isset($_POST['update-submit'])){
 
 
 
-	// Abfrage der Userdaten
+
+
+
+
+  if(isset($_POST['post_delete'])){
+  	$delete_id = $_POST['post_delete'];
+    $image = get_image_name($delete_id);
+    $name = mysqli_fetch_assoc($image);
+    unlink("post_img/". $name['image']);
+  	delete_post($delete_id);
+  }
+
+
+
+  // Abfrage der Userdaten
   $result = get_user($user_id);
   $user = mysqli_fetch_assoc($result);
-
-
 
   $post_list = get_image_posts($user_id);
 
@@ -222,14 +234,14 @@ if(isset($_POST['update-submit'])){
 
                           <?php if($post['image_id'] != NULL){  ?>
                                               <li class="col-sm-4">
-                                                  <div class="thumbnail" id="<?php echo "carousel-selector-" . $howmanyposts; ?>" ><a class="close" href="#">×</a><img src="post_img/<?php echo $post['image']; ?>" alt="postimage"></div>
+                                                  <div class="thumbnail" id="<?php echo "carousel-selector-" . $howmanyposts; ?>" ><button class="close" href="#" name="post_delete" value="<?php echo $post['image_id'] ?>">×</button><img src="post_img/<?php echo $post['image']; ?>" alt="postimage"></div>
                                               </li>
                           <?php } ?>
 
 
                           <?php
 
-                          $howmanyposts = $howmanyposts + 1;
+                          $howmanyposts++;
 
 
                         } ?>
