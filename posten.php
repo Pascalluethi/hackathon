@@ -1,11 +1,32 @@
 <?php
 
+
+require_once('system/data.php');
+require_once('system/security.php');
+require_once('system/secretdata.php');
+
+
 session_start();
 if(!isset($_SESSION['id'])){
   header("Location:index.php");
 }else{
   $user_id = $_SESSION['id'];
 }
+
+if(isset($_POST['post-submit'])){
+
+  	$upload_post = false;
+  	if ( ($_FILES['post_img']['name']  != "")){
+  		require_once('system/upload.php');
+  		$image = upload_post_image($_FILES['post_img']);
+    	$upload_post = true;
+    }else{
+    	$image = NULL;
+  	}
+  	if($upload_post){
+    	echo "Bild wurde erfolgreich hochgeladen";
+    }
+  }
 
 ?>
 
@@ -39,7 +60,7 @@ if(!isset($_SESSION['id'])){
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" style="color:#59BFE4";>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -78,6 +99,15 @@ if(!isset($_SESSION['id'])){
 
                         <div class="well">
                             <input type="file" name="post_img" id="post_img">
+                            <!-- Profilbild
+                            <div class="col-sm-3">
+
+        <img src="user_img/
+        <?php //echo $user['img_src'];?>" alt="Profilbild" class="img-responsive">
+        /Profilbild
+  </div>
+      -->
+
                         </div>
 
                       </div>

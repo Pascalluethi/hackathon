@@ -1,5 +1,9 @@
 <?php
 
+require_once('secretdata.php');
+require_once('data.php');
+require_once('security.php');
+
   /*
   * Create a random string
   * @author	XEWeb <>
@@ -25,7 +29,7 @@
 
     $uploadOk = true;
   	$upload_path = "user_img/";   // Zielverzeichnis für hochzuladene Datei
-    $max_file_size = 500000;      // max. Dateigrösse in KB
+    $max_file_size = 1000000;      // max. Dateigrösse in KB
     $result = get_user($user_id);
     $user = mysqli_fetch_assoc($result);
     $image = $user['img_src']; // bisheriger gespeicherter Dateiname
@@ -69,7 +73,7 @@
 
     $uploadOk = true;
   	$upload_path = "post_img/";   // Zielverzeichnis für hochzuladene Datei
-    $max_file_size = 1500000;      // max. Dateigrösse in KB
+    $max_file_size = 1000000;      // max. Dateigrösse in KB
     $image = NULL;
 
     // Filetype kontrollieren
@@ -101,6 +105,9 @@
         move_uploaded_file (
   			  $image_file['tmp_name'] ,
           $upload_path . $image );
+          $actuser = get_user($user_id);
+          $sql = "INSERT INTO image (user_id, image) VALUES ('$actuser', '$image');";
+      		return get_result($sql);
   	  }
   	}
 

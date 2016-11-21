@@ -5,8 +5,10 @@ require_once('system/data.php');
 require_once('system/security.php');
 require_once('system/secretdata.php');
 
-
-
+session_start();
+if(isset($_SESSION['id'])) {
+  $user_id = $_SESSION['id'];
+}
 
 $error = false;
 $error_msg = "";
@@ -23,11 +25,13 @@ if(isset($_POST['login-submit'])){
 
       $row_count = mysqli_num_rows($result);
 
+
       if($row_count == 1){
         $user = mysqli_fetch_assoc($result);
-        session_start();
         $_SESSION['id'] = $user['user_id'];
 
+        $success = true;
+        $success_msg .= "Sie haben sich erfolgreich eingeloggt.";
       }else {
         $error = true;
         $error_msg .= "Leider konnten wir ihre E-Mailadresse oder ihr Passwort nicht finden.";
@@ -38,10 +42,6 @@ if(isset($_POST['login-submit'])){
       $error = true;
       $error_msg .= "Bitte füllen Sie beide Felder aus.<br/>";
     }
-    if(login($email, $password)){
-             $success = true;
-             $success_msg .= "Sie haben sich erfolgreich eingeloggt.";
-  }
 }
 
 //Registrierung
@@ -83,6 +83,12 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
 }
 }
 
+
+function logout(){
+  if(isset($_SESSION['id'])) unset($_SESSION['id']);
+  session_destroy();
+}
+
 ?>
 
 
@@ -96,7 +102,7 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
   <meta name="description" content="">
   <meta name="author" content="">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>PicMap Leslie</title>
+  <title>PicMap</title>
 
   <!-- Bootstrap -->
   <!-- Latest compiled and minified CSS -->
@@ -118,7 +124,7 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" style="color:#59BFE4";>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -133,16 +139,16 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
           <li class="active"><a href="index.php">Home</a></li>
           <li><a href="#" data-toggle="modal" data-target="#myModallogin">Login</a></li>
           <li><a href="#" data-toggle="modal" data-target="#myModalregister">Registrieren</a></li>
-            <?php if ($success == true){?>
+            <?php if (isset($user_id)){?>
             <li><a href="posten.php">Bilder posten</a></li>
             <?php } ?>
 
-            <?php if ($success == true){?>
+            <?php if (isset($user_id)){?>
           <li><a href="profil.php">Profil</a></li>
             <?php } ?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="index.php">Logout</a></li>
+          <li><a href="index.php" >Logout</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

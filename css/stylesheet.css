@@ -16,6 +16,21 @@
 
 
 
+.hide-bullets {
+    list-style:none;
+    margin-left: -40px;
+    margin-top:20px;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    width: 100%;
+}
+
+
 .p42thumbnail {
   padding:0px;
 }
@@ -36,7 +51,7 @@
 }
 .p42panel>.panel-heading:after{
 	border-width:7px;
-	border-right-color:#59BFE4;
+	border-right-color:#f7f7f7;
 	margin-top:1px;
 	margin-left:2px;
 }
