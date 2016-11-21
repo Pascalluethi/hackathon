@@ -41,7 +41,14 @@ if(isset($_POST['update-submit'])){
   $user = mysqli_fetch_assoc($result);
 
 
-?>
+
+  $post_list = get_image_posts($user_id);
+
+  $post_list_two = get_image_posts($user_id);
+  $howmanyposts = 0;
+  $howmanypoststwo = 0;
+
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -205,146 +212,65 @@ if(isset($_POST['update-submit'])){
   <div id="main_area">
           <!-- Slider -->
           <div class="row">
-              <div class="col-sm-6" id="slider-thumbs">
+              <div class="col-sm-12" id="slider-thumbs">
                   <!-- Bottom switcher of slider -->
-                  <ul class="hide-bullets">
-                      <li class="col-sm-3">
-                          <a class="thumbnail" id="carousel-selector-0">
-                              <img src="http://placehold.it/150x150&text=zero">
-                          </a>
-                      </li>
-
-                      <li class="col-sm-3">
-                          <a class="thumbnail" id="carousel-selector-1"><img src="http://placehold.it/150x150&text=1"></a>
-                      </li>
-
-
+                  <ul class="hide-bullets" style="list-style: none;">
 
 
 
                       <?php   while($post = mysqli_fetch_assoc($post_list)) { ?>
 
-                          <?php if($post['post_img'] != NULL){  ?>
-                                              <li class="col-sm-3">
-                                                  <a class="thumbnail" id="carousel-selector-2"><img src="post_img/<?php echo $post['post_img']; ?>" alt="postimage"></a>
+                          <?php if($post['image_id'] != NULL){  ?>
+                                              <li class="col-sm-4">
+                                                  <div class="thumbnail" id="<?php echo "carousel-selector-" . $howmanyposts; ?>" ><a class="close" href="#">×</a><img src="post_img/<?php echo $post['image']; ?>" alt="postimage"></div>
                                               </li>
                           <?php } ?>
 
-                      <?php   } ?>
+
+                          <?php
+
+                          $howmanyposts = $howmanyposts + 1;
+
+
+                        } ?>
 
 
 
-
-
-
-
-                      <li class="col-sm-3">
-                          <a class="thumbnail" id="carousel-selector-3"><img src="http://placehold.it/150x150&text=3"></a>
-                      </li>
-
-                      <li class="col-sm-3">
-                          <a class="thumbnail" id="carousel-selector-4"><img src="http://placehold.it/150x150&text=4"></a>
-                      </li>
-
-                      <li class="col-sm-3">
-                          <a class="thumbnail" id="carousel-selector-5"><img src="http://placehold.it/150x150&text=5"></a>
-                      </li>
-                      <li class="col-sm-3">
-                          <a class="thumbnail" id="carousel-selector-6"><img src="http://placehold.it/150x150&text=6"></a>
-                      </li>
-
-                      <li class="col-sm-3">
-                          <a class="thumbnail" id="carousel-selector-7"><img src="http://placehold.it/150x150&text=7"></a>
-                      </li>
-
-                      <li class="col-sm-3">
-                          <a class="thumbnail" id="carousel-selector-8"><img src="http://placehold.it/150x150&text=8"></a>
-                      </li>
-
-                      <li class="col-sm-3">
-                          <a class="thumbnail" id="carousel-selector-9"><img src="http://placehold.it/150x150&text=9"></a>
-                      </li>
-                      <li class="col-sm-3">
-                          <a class="thumbnail" id="carousel-selector-10"><img src="http://placehold.it/150x150&text=10"></a>
-                      </li>
-
-                      <li class="col-sm-3">
-                          <a class="thumbnail" id="carousel-selector-11"><img src="http://placehold.it/150x150&text=11"></a>
-                      </li>
-
-                      <li class="col-sm-3">
-                          <a class="thumbnail" id="carousel-selector-12"><img src="http://placehold.it/150x150&text=12"></a>
-                      </li>
-
-                      <li class="col-sm-3">
-                          <a class="thumbnail" id="carousel-selector-13"><img src="http://placehold.it/150x150&text=13"></a>
-                      </li>
-                      <li class="col-sm-3">
-                          <a class="thumbnail" id="carousel-selector-14"><img src="http://placehold.it/150x150&text=14"></a>
-                      </li>
-
-                      <li class="col-sm-3">
-                          <a class="thumbnail" id="carousel-selector-15"><img src="http://placehold.it/150x150&text=15"></a>
-                      </li>
                   </ul>
               </div>
+
+                <!--/Slider
               <div class="col-sm-6">
                   <div class="col-xs-12" id="slider">
-                      <!-- Top part of the slider -->
+
                       <div class="row">
                           <div class="col-sm-12" id="carousel-bounding-box">
                               <div class="carousel slide" id="myCarousel">
-                                  <!-- Carousel items -->
+
                                   <div class="carousel-inner">
-                                      <div class="active item" data-slide-number="0">
-                                          <img src="http://placehold.it/470x480&text=zero"></div>
 
-                                      <div class="item" data-slide-number="1">
-                                          <img src="http://placehold.it/470x480&text=1"></div>
 
-                                      <div class="item" data-slide-number="2">
-                                          <img src="http://placehold.it/470x480&text=2"></div>
+                                    <?php   while($posttwo = mysqli_fetch_assoc($post_list_two)) { ?>
 
-                                      <div class="item" data-slide-number="3">
-                                          <img src="http://placehold.it/470x480&text=3"></div>
+                                        <?php if($posttwo['image_id'] != NULL){  ?>
 
-                                      <div class="item" data-slide-number="4">
-                                          <img src="http://placehold.it/470x480&text=4"></div>
 
-                                      <div class="item" data-slide-number="5">
-                                          <img src="http://placehold.it/470x480&text=5"></div>
+                                      <div class="<?php if($howmanypoststwo == 0){ echo "active item"; } else { echo "item"; } ?>" data-slide-number="<?php echo $howmanypoststwo; ?>">
+                                          <img src="post_img/<?php echo $posttwo['image']; ?>"></div>
 
-                                      <div class="item" data-slide-number="6">
-                                          <img src="http://placehold.it/470x480&text=6"></div>
+                                          <?php } ?>
 
-                                      <div class="item" data-slide-number="7">
-                                          <img src="http://placehold.it/470x480&text=7"></div>
+                                          <?php
 
-                                      <div class="item" data-slide-number="8">
-                                          <img src="http://placehold.it/470x480&text=8"></div>
+                                          $howmanypoststwo = $howmanypoststwo + 1;
 
-                                      <div class="item" data-slide-number="9">
-                                          <img src="http://placehold.it/470x480&text=9"></div>
 
-                                      <div class="item" data-slide-number="10">
-                                          <img src="http://placehold.it/470x480&text=10"></div>
+                                        } ?>
 
-                                      <div class="item" data-slide-number="11">
-                                          <img src="http://placehold.it/470x480&text=11"></div>
 
-                                      <div class="item" data-slide-number="12">
-                                          <img src="http://placehold.it/470x480&text=12"></div>
 
-                                      <div class="item" data-slide-number="13">
-                                          <img src="http://placehold.it/470x480&text=13"></div>
-
-                                      <div class="item" data-slide-number="14">
-                                          <img src="http://placehold.it/470x480&text=14"></div>
-
-                                      <div class="item" data-slide-number="15">
-                                          <img src="http://placehold.it/470x480&text=15"></div>
                                   </div>
-                                  <!-- Carousel nav -->
+
                                   <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
                                       <span class="glyphicon glyphicon-chevron-left"></span>
                                   </a>
@@ -356,7 +282,7 @@ if(isset($_POST['update-submit'])){
                       </div>
                   </div>
               </div>
-              <!--/Slider-->
+            -->
           </div>
 
       </div>

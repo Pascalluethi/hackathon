@@ -75,6 +75,7 @@ require_once('security.php');
   	$upload_path = "post_img/";   // Zielverzeichnis für hochzuladene Datei
     $max_file_size = 1000000;      // max. Dateigrösse in KB
     $image = NULL;
+    $user_id = $_SESSION['id'];
 
     // Filetype kontrollieren
   	if ( ($image_file['name']  != "")){
@@ -105,8 +106,7 @@ require_once('security.php');
         move_uploaded_file (
   			  $image_file['tmp_name'] ,
           $upload_path . $image );
-          $actuser = get_user($user_id);
-          $sql = "INSERT INTO image (user_id, image) VALUES ('$actuser', '$image');";
+          $sql = "INSERT INTO image (user_id, image) VALUES ('$user_id', '$image');";
       		return get_result($sql);
   	  }
   	}
