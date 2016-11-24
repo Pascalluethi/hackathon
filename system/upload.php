@@ -22,7 +22,7 @@ require_once('security.php');
     return $str;
   }
 
-
+/*
 
   // Bildupload
   function upload_image($image_file, $user_id){
@@ -68,6 +68,8 @@ require_once('security.php');
 
   }
 
+  */
+
   // Bildupload
   function upload_post_image($image_file, $kategorie){
 
@@ -106,10 +108,31 @@ require_once('security.php');
         move_uploaded_file (
   			  $image_file['tmp_name'] ,
           $upload_path . $image );
-          $sql = "INSERT INTO image (user_id, categories, image) VALUES ('$user_id', '$kategorie', '$image');";
-      		return get_result($sql);
-  	  }
-  	}
+
+            $filename = $upload_path . $image;
+
+            $exif = exif_read_data($filename);
+            $lon = getGps($exif["GPSLongitude"], $exif['GPSLongitudeRef']);
+            $lat = getGps($exif["GPSLatitude"], $exif['GPSLatitudeRef']);
+
+            $degreeslon = $lon['degrees'];
+            $minuteslon = ($lon['minutes'] / 60);
+            $secondslon = ($lon['seconds'] / 3600);
+
+            $degreeslat = $lat['degrees'];
+            $minuteslat = ($lat['minutes'] / 60);
+            $secondslat = ($lat['seconds'] / 3600);
+
+            $latitude = $degreeslat + $minuteslat + $secondslat;
+            $longitude = $degreeslon + $minuteslon + $secondslon;
+
+
+
+            $sql = "INSERT INTO image (user_id, x_coordinates, y_coordinates, categories, image) VALUES ('$user_id', '$latitude', '$longitude', '$kategorie', '$image');";
+        		return get_result($sql);
+    	  }
+    	}
+
 
   	return $image;
 

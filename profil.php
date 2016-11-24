@@ -56,9 +56,8 @@ if(isset($_POST['update-submit'])){
 
   $post_list = get_image_posts($user_id);
 
-  $post_list_two = get_image_posts($user_id);
   $howmanyposts = 0;
-  $howmanypoststwo = 0;
+
 
   ?>
 
