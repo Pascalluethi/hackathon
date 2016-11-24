@@ -6,12 +6,19 @@ require_once('system/security.php');
 require_once('system/secretdata.php');
 
 
+
+
+
 session_start();
-if(!isset($_SESSION['id'])){
-  header("Location:index.php");
-}else{
+if(isset($_POST['logout-submit'])){
+  logout();
+} else if(isset($_SESSION['id'])) {
   $user_id = $_SESSION['id'];
+} else {
+  header("Location:index.php");
 }
+
+
 
 if(isset($_POST['post-submit'])){
 
@@ -74,12 +81,23 @@ if(isset($_POST['post-submit'])){
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li class="active"><a href="index.php">Home</a></li>
-          <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
-          <li><a href="posten.php">Bilder posten</a></li>
+          <?php if (!isset($user_id)){?>
+          <li><a href="#" data-toggle="modal" data-target="#myModallogin">Login</a></li>
+          <li><a href="#" data-toggle="modal" data-target="#myModalregister">Registrieren</a></li>
+          <?php } ?>
+            <?php if (isset($user_id)){?>
+            <li><a href="posten.php">Bilder posten</a></li>
+            <?php } ?>
+
+            <?php if (isset($user_id)){?>
           <li><a href="profil.php">Profil</a></li>
+            <?php } ?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="index.php">Logout</a></li>
+            <?php if (isset($user_id)){?>
+
+          <li><form method="post"><input type="submit" name="logout-submit" id="logout-submit" tabindex="4" class="form-control btn btn-info" value="Logout"></form></li>
+          <?php } ?>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
