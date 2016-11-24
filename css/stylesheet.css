@@ -4,7 +4,9 @@
 /* So werden nur gezielt diese Panels verändert.
 /* http://bootsnipp.com/snippets/featured/user-comment-example */
 
-
+#logout-submit {
+margin-top: 20px;
+}
 
 
 .modal.modal-wide .modal-dialog {

@@ -72,7 +72,7 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
   if($password == $confirm_password){
            if(register($email, $password, $name, $age, $gender)){
                     $success = true;
-                    $success_msg .= "Sie haben erfolgreich registriert.</br>
+                    $success_msg .= "Sie haben sich erfolgreich registriert.</br>
                     Bitte loggen Sie sich jetzt ein.</br>";
 
 
@@ -141,21 +141,21 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
         <ul class="nav navbar-nav">
           <li class="active"><a href="index.php">Home</a></li>
           <?php if (!isset($user_id)){?>
-          <li><a href="#" data-toggle="modal" data-target="#myModallogin">Login</a></li>
-          <li><a href="#" data-toggle="modal" data-target="#myModalregister">Registrieren</a></li>
+          <li><a href="#" data-toggle="modal" data-target="#myModallogin" class="btn btn-default">Login</a></li>
+          <li><a href="#" data-toggle="modal" data-target="#myModalregister" class="btn btn-default">Registrieren</a></li>
           <?php } ?>
             <?php if (isset($user_id)){?>
-            <li><a href="posten.php">Bilder posten</a></li>
+            <li><a href="posten.php" type="btn btn-default">Bilder posten</a></li>
             <?php } ?>
 
             <?php if (isset($user_id)){?>
-          <li><a href="profil.php">Profil</a></li>
+          <li><a href="profil.php" type="btn btn-default">Profil</a></li>
             <?php } ?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <?php if (isset($user_id)){?>
 
-          <li><form method="post"><input type="submit" name="logout-submit" id="logout-submit" tabindex="4" class="form-control btn btn-info" value="Logout"></form></li>
+          <li><form method="post"><input type="submit" name="logout-submit" id="logout-submit" tabindex="4" class="btn btn-default" style="color: green" value="Logout"></form></li>
           <?php } ?>
         </ul>
       </div><!-- /.navbar-collapse -->
