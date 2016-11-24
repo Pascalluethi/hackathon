@@ -25,7 +25,7 @@ if(isset($_POST['post-submit'])){
     	$image = NULL;
   	}
   	if($upload_post){
-    	echo "Bild wurde erfolgreich hochgeladen";
+    	echo '<script type="text/javascript">alert("Bild wurde erfolgreich hochgeladen");</script>';
     }
   }
 
@@ -100,14 +100,7 @@ if(isset($_POST['post-submit'])){
 
                         <div class="well">
                             <input type="file" name="post_img" id="post_img">
-                            <!-- Profilbild
-                            <div class="col-sm-3">
 
-        <img src="user_img/
-        <?php //echo $user['img_src'];?>" alt="Profilbild" class="img-responsive">
-        /Profilbild
-  </div>
-      -->
 
                         </div>
 
