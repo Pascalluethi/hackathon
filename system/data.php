@@ -69,6 +69,13 @@ require_once('secretdata.php');
 
 
 
+		function get_all_images(){
+	    $sql = "SELECT * FROM image;";
+			return get_result($sql);
+		}
+
+
+
 	function delete_post($image_id){
     $sql = "DELETE FROM image WHERE image_id = $image_id;";
 		return get_result($sql);

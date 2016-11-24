@@ -89,6 +89,20 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
 }
 
 
+
+
+
+
+
+// Abfrage der Userdaten
+
+
+$post_list = get_all_images();
+
+$howmanyposts = 0;
+
+
+
 ?>
 
 
@@ -116,6 +130,7 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
   <![endif]-->
 
   <link rel="stylesheet" href="css/stylesheet.css">
+
 
 </head>
 <body>
@@ -183,9 +198,61 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
         </div> <!-- /Post hinzufügen -->
       </div> <!-- /Hauptinhalt -->
     </div>
-  </div>
+
 
 <!-- /Map -->
+
+
+
+
+
+
+<!-- alle Bilder -->
+
+<div class="panel panel-default container-fluid"> <!-- fluid -->
+  <div class="panel-heading row">
+    <div class="col-sm-6">
+        <h4>Meine Bilder</h4>
+      </div>
+  </div>
+  <div class="panel-body">
+
+<div id="main_area">
+      <!-- Slider -->
+      <div class="row">
+          <div class="col-sm-12" id="slider-thumbs">
+              <!-- Bottom switcher of slider -->
+              <ul class="hide-bullets" style="list-style: none;">
+
+                <?php   while($post = mysqli_fetch_assoc($post_list)) { ?>
+                      <?php if($post['image_id'] != NULL){  ?>
+                                          <li class="col-sm-4">
+                                              <div class="thumbnail" id="<?php echo "carousel-selector-" . $howmanyposts; ?>" ><button class="close" href="#" name="post_delete" value="<?php echo $post['image_id'] ?>">×</button><img src="post_img/<?php echo $post['image']; ?>" alt="postimage"></div>
+
+                                              Rating coming soon..<br><br>
+
+                                          </li>
+                      <?php } ?>
+                    <?php
+                      $howmanyposts++;
+                  } ?>
+
+
+
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+</div> <!-- ende Container -->
+
+
 
 
 
@@ -334,6 +401,36 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confi
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</form>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 <?php
 if(!empty($success_msg)) {     //wenn erfolgreich eingeloggt führe echo aus (bezieht sich auf Variable die true ist)
   echo '<script type="text/javascript">alert("' . $success_msg . '");</script>';
@@ -352,6 +449,9 @@ if(!empty($success_msg)) {     //wenn erfolgreich eingeloggt führe echo aus (be
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
 
 
 
